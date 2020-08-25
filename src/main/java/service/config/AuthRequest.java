@@ -1,24 +1,9 @@
 package service.config;
 
+import lombok.Data;
+
+@Data
 public class AuthRequest {
-    private String login;
+    private String username;
     private String password;
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setName(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
 }

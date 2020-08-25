@@ -1,6 +1,6 @@
 package service.controller;
 
-import service.domain.Users;
+import service.model.Users;
 import service.exceptions.RecordAlreadyExistsException;
 import service.repo.UserRepo;
 import org.springframework.beans.BeanUtils;
@@ -31,7 +31,7 @@ public class UserController {
 
     @PostMapping
     public Users save(@RequestBody Users user) {
-        Users fromDB = userRepo.findByLogin(user.getLogin());
+        Users fromDB = userRepo.findByUsername(user.getUsername());
         if (fromDB == null) {
             Users nUser = new Users();
             BeanUtils.copyProperties(user, nUser, "id", "role");

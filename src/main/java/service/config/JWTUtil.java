@@ -34,6 +34,7 @@ public class JWTUtil {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
@@ -62,6 +63,6 @@ public class JWTUtil {
     }
 
     private Date expireTimeFromNow() {
-        return new Date(System.currentTimeMillis() + sessionTime );
+        return new Date(System.currentTimeMillis() + sessionTime);
     }
 }

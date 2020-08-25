@@ -1,27 +1,33 @@
 package service.controller;
 
-import service.domain.Message;
-import service.repo.MessageRepo;
 import org.springframework.beans.BeanUtils;
+import service.dto.MessageDto;
+import service.model.Message;
+import service.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import service.service.MessageService;
+import service.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("message")
 public class MessageController {
 
-    private final MessageRepo messageRepo;
+    private final MessageService messageService;
+    private final UserService userService;
 
     @Autowired
-    public MessageController(MessageRepo messageRepo) {
-        this.messageRepo = messageRepo;
+    public MessageController(MessageService messageService, UserService userService) {
+        this.messageService = messageService;
+        this.userService = userService;
     }
 
     @GetMapping
     public List<Message> list() {
-        return messageRepo.findAll();
+        return messageService.findAll();
     }
 
     @GetMapping("{id}")
@@ -30,22 +36,23 @@ public class MessageController {
     }
 
     @PostMapping
-    public Message create(@RequestBody Message message){
-        return messageRepo.save(message);
+    public Message create(
+            Principal user,
+            @RequestBody MessageDto messageDto){
+        return messageService.save(messageDto, user);
     }
 
     @PutMapping("{id}")
     public Message update(
             @PathVariable("id") Message messageFromDb,
-            @RequestBody Message message
+            @RequestBody MessageDto message
     ){
-        BeanUtils.copyProperties(message, messageFromDb, "id");
-        return messageRepo.save(messageFromDb);
+        return messageService.update(messageFromDb, message);
     }
 
     @DeleteMapping("{id}")
     public void delete (@PathVariable("id") Message message ){
-        messageRepo.delete(message);
+        messageService.delete(message);
     }
 
 }

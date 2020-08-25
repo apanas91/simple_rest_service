@@ -29,10 +29,10 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     @ResponseStatus(HttpStatus.OK)
-    public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest){
+    public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication;
         try {
-            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getLogin(), authRequest.getPassword()));
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
             System.out.println(authentication);
         } catch (BadCredentialsException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Имя или пароль неправильны", e);
