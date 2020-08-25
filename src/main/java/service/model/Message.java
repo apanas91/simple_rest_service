@@ -21,14 +21,17 @@ public class Message {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sender_id")
     private Users sender;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "recipient_id")
+    private Users recipient;
 
     public Message(String text) {
         this.text = text;
     }
 
-    public Message(String text, Users sender) {
+    public Message(String text, Users recipient, Users sender) {
         this.text = text;
+        this.recipient = recipient;
         this.sender = sender;
     }
 }

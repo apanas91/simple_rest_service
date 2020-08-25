@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public Users getUser(@PathVariable long id) {
-        return userRepo.findById(id);
+        return userRepo.findById(id).get();
     }
 
     @PostMapping
