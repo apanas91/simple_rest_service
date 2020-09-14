@@ -1,45 +1,39 @@
 package service.controller;
 
 import service.model.Users;
-import service.exceptions.RecordAlreadyExistsException;
 import service.repo.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import service.service.UserService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
     private final UserRepo userRepo;
 
     @Autowired
-    public UserController(UserRepo userRepo) {
+    public UserController(UserService userService, UserRepo userRepo) {
+        this.userService = userService;
         this.userRepo = userRepo;
     }
 
     @GetMapping
     public List<Users> getList() {
-        return userRepo.findAll();
+        return userService.findAll();
     }
 
     @GetMapping("{id}")
     public Users getUser(@PathVariable long id) {
-        return userRepo.findById(id).get();
+        return userService.getUserById(id);
     }
 
     @PostMapping
     public Users save(@RequestBody Users user) {
-        Users fromDB = userRepo.findByUsername(user.getUsername());
-        if (fromDB == null) {
-            Users nUser = new Users();
-            BeanUtils.copyProperties(user, nUser, "id", "role");
-            nUser.setRole("USER");
-            return userRepo.save(nUser);
-        } else {
-            throw new RecordAlreadyExistsException();
-        }
+        return userService.createUser(user);
     }
 
     @PutMapping("{id}")

@@ -1,6 +1,7 @@
 package service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,11 +19,14 @@ import java.util.List;
 public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    @JsonView(Views.Id.class)
+    private Long id;
+
+    @JsonView(Views.UserView.class)
     private String username;
-    @JsonIgnore
+
     private String password;
-    private String position;
+
     private String role;
 
 

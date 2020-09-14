@@ -22,6 +22,11 @@ public class AwesomeExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new AwesomeException("Record is already exists"), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(io.jsonwebtoken.ExpiredJwtException.class)
+    protected ResponseEntity<AwesomeException> handleExpiredJwtException() {
+        return new ResponseEntity<>(new AwesomeException("Token is expired"), HttpStatus.UNAUTHORIZED);
+    }
+
     @Data
     @AllArgsConstructor
     private static class AwesomeException {

@@ -23,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -43,8 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/user").permitAll()
-                .and().authorizeRequests().antMatchers("/message/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/message/**").permitAll()
+//                .and().authorizeRequests().antMatchers("/message/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .and().authorizeRequests().antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 .and().authorizeRequests().antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -1,10 +1,15 @@
 package service.repo;
 
+import org.apache.catalina.User;
 import service.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
+import service.model.Users;
+
+import java.util.List;
 
 public interface MessageRepo extends JpaRepository<Message, Long> {
-//    List<Message> findBySenderAndRecipient(Long sender, Long recipient);
-//    List<Message> findByRecipientAndSender(Long recipient, Long sender);
-
+    //запрос входящих
+    List<Message> findByRecipientIsAndSenderIs(Users recipient, Users sender);
+    //Запрос исходящих сообщения
+    List<Message> findBySenderIsAndRecipientIs(Users sender, Users recipient);
 }

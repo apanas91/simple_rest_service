@@ -40,6 +40,7 @@ public class JWTUtil {
     }
 
     private Boolean isTokenExpired(String token) {
+        //ToDO добавить обработку исключения при истекшем токене
         return extractExpiration(token).before(new Date());
     }
 
