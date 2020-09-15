@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
 
     public Users getUserById(Long id) {
         Optional<Users> userFromDb = userRepo.findById(id);
-        if (userFromDb.isEmpty()){
+        if (userFromDb == null){
              throw new UsernameNotFoundException("Username with id" + id + " not found");
         } else {
             return userFromDb.get();
