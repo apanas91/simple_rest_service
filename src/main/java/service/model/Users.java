@@ -7,6 +7,8 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import service.model.soap.userservice.UserRes;
+//import service.model.soap.GetUserRes;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,6 +32,13 @@ public class Users implements UserDetails {
 
     private String role;
 
+    public UserRes toUserRes(){
+        UserRes user = new UserRes();
+        user.setId(this.id);
+        user.setUsername(this.username);
+        user.setRole(this.role);
+        return user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -58,4 +67,6 @@ public class Users implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }
