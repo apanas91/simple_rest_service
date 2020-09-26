@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/message")
+@RequestMapping("/api/v1/message")
 public class MessageController {
 
     private final MessageService messageService;
@@ -67,7 +67,6 @@ public class MessageController {
             Principal user,
             @PathVariable("id") Users companion
     ) {
-
         Map<String, Object> resp = new HashMap<>();
         resp.put("messages", messageService.getChat(user, companion));
         resp.put("total", 13);

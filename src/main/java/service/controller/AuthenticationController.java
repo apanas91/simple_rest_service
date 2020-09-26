@@ -32,7 +32,7 @@ public class AuthenticationController {
     private UserService userService;
 
 
-    @PostMapping("/authenticate")
+    @PostMapping("/api/v1/authenticate")
     @ResponseStatus(HttpStatus.OK)
     public AuthResponse createAuthenticationToken(@RequestBody AuthRequest authRequest) {
         Authentication authentication;
@@ -53,7 +53,7 @@ public class AuthenticationController {
         return new AuthResponse(jwt);
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/api/v1/registration")
     public Users registration(@RequestBody Users user) {
         return userService.createUser(user);
     }
