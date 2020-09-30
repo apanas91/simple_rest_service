@@ -57,6 +57,12 @@
             <artifactId>wsdl4j</artifactId>
         </dependency>
 
+        <!--получаем значения в xml/json в зависимости от Accept-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

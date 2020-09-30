@@ -1,10 +1,10 @@
 package service.controller;
 
-import service.model.Users;
-import service.repo.UserRepo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import service.model.Users;
+import service.repo.UserRepo;
 import service.service.UserService;
 
 import java.util.List;
