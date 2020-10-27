@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  
+</head>
+<body>
+
+<script>
+new Vue({
+  data: {
+    a: 1
+  },
+  created: function () {
+    // `this` указывает на экземпляр vm
+    console.log('Значение a: ' + this.a)
+  }
+})
+// => "Значение a: 1"
+</script>
+
+
+<span>Сообщение: {{ msg }}</span>
+
+<span v-once>Это сообщение никогда не изменится: {{ msg }}</span>
+
+<p>Двойные фигурные скобки: {{ rawHtml }}</p>
+<p>Директива v-html: <span v-html="rawHtml"></span></p>
+
+<button v-bind:disabled="isButtonDisabled">Кнопка</button>
+
+
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+
+
+
+</body>
+</html>
